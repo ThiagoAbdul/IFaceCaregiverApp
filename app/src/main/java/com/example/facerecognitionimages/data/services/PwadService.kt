@@ -1,5 +1,6 @@
 package com.example.facerecognitionimages.data.services
 
+import com.example.facerecognitionimages.apiUrl
 import com.example.facerecognitionimages.data.models.KnownPersonResponse
 import com.example.facerecognitionimages.data.models.PwadResponse
 import com.example.facerecognitionimages.data.models.RegisterPwadRequest
@@ -20,7 +21,7 @@ import kotlinx.serialization.json.Json
 
 class PwadService(private val http: HttpClient) {
 
-    private val BASE_URL = "http://10.0.2.2:5132/api"
+    private val BASE_URL = apiUrl
 
 
     suspend fun addPwad(request: RegisterPwadRequest): PwadResponse{

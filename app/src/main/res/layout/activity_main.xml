@@ -12,39 +12,39 @@
         android:layout_height="0dp"
         android:layout_marginTop="60dp"
         android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonregister"
+        app:layout_constraintBottom_toTopOf="@+id/buttonlistpwads"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
-    <Button
-        android:id="@+id/buttonregister"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/form_control_height"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:text="Register"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttonrecognize"
- />
+<!--    <Button-->
+<!--        android:id="@+id/buttonregister"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="@dimen/form_control_height"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:text="Register"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/buttonrecognize"-->
+<!-- />-->
 
-    <Button
-        android:id="@+id/buttonrecognize"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/form_control_height"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:text="Recognize "
-        android:textSize="20sp"
+<!--    <Button-->
+<!--        android:id="@+id/buttonrecognize"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="@dimen/form_control_height"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:text="Recognize "-->
+<!--        android:textSize="20sp"-->
 
-        app:layout_constraintBottom_toTopOf="@+id/buttonlistpwads"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonlistpwads"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
     <Button
         android:id="@+id/buttonlistpwads"
@@ -55,7 +55,6 @@
         android:layout_marginBottom="16dp"
         android:text="View People With Alzheimer Disease"
         android:textSize="20sp"
-
         app:layout_constraintBottom_toTopOf="@+id/buttonaddpwad"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

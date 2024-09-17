@@ -29,15 +29,22 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.example.facerecognitionimages.data.models.AddImageRequest
+import com.example.facerecognitionimages.data.services.KnownPersonService
 import com.example.facerecognitionimages.face_recognition.FaceClassifier
 import com.example.facerecognitionimages.face_recognition.FaceClassifier.Recognition
 import com.example.facerecognitionimages.face_recognition.TFLiteFaceRecognition
+import com.example.facerecognitionimages.utils.bitmapToBase64
 import com.example.facerecognitionimages.utils.croppImage
 import com.example.facerecognitionimages.utils.parseEmbeddingToString
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetector
 import com.google.mlkit.vision.face.FaceDetectorOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import java.io.IOException
 
 class RegisterActivity : AppCompatActivity() {
@@ -46,6 +53,7 @@ class RegisterActivity : AppCompatActivity() {
     var imageView: ImageView? = null
     var image_uri: Uri? = null
     private var knownPersonId: String? = null
+    private val knownPersonService: KnownPersonService by inject()
 
     //TODO declare face detector
     private var detector: FaceDetector? = null
@@ -263,18 +271,38 @@ class RegisterActivity : AppCompatActivity() {
                 nameEd.error = "Enter Name"
             }
 
-            Log.d("TEST", parseEmbeddingToString(rec.embeeding as Array<FloatArray>))
+
+            val embedding = parseEmbeddingToString(rec.embeeding as Array<FloatArray>)
+
+            if(knownPersonId != null){
+                saveImage(embedding, croppedFace) {
+                    Toast.makeText(
+                        this@RegisterActivity,
+                        "Face Registered Successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    dialog.dismiss()
+                }
+            }
 
             faceClassifier!!.register(name, rec)
-            Toast.makeText(
-                this@RegisterActivity,
-                "Face Registered Successfully",
-                Toast.LENGTH_SHORT
-            ).show()
-            dialog.dismiss()
+
+
         }
 
         dialog.show()
+    }
+
+    private fun saveImage(embedding: String, bitmap: Bitmap, action: () -> Unit){
+        if(knownPersonId == null)
+            return
+        CoroutineScope(Dispatchers.Main).launch {
+            knownPersonService.addImageForKnownPerson(
+                knownPersonId!!,
+                AddImageRequest(base64Image = bitmapToBase64(bitmap), embedding)
+            )
+            action()
+        }
     }
 
     override fun onDestroy() {
