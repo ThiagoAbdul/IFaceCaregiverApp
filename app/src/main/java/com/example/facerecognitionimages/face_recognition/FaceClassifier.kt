@@ -43,14 +43,6 @@ interface FaceClassifier {
             crop = null
         }
 
-        fun getLocation(): RectF {
-            return RectF(location)
-        }
-
-        fun setLocation(location: RectF?) {
-            this.location = location
-        }
-
         override fun toString(): String {
             var resultString = ""
             if (id != null) {

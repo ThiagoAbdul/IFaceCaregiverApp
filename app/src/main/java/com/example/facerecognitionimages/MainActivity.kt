@@ -8,8 +8,7 @@ import com.example.facerecognitionimages.ui.activities.AddPwadActivity
 import com.example.facerecognitionimages.ui.activities.ListPwadActivity
 
 class MainActivity : AppCompatActivity() {
-    lateinit var registerBtn: Button
-    lateinit var recognizeBtn: Button
+
     lateinit var addPwadBtn: Button
     lateinit var listPwadBtn: Button
 
@@ -18,26 +17,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        registerBtn = findViewById(R.id.buttonregister)
-        recognizeBtn = findViewById(R.id.buttonrecognize)
+//        registerBtn = findViewById(R.id.buttonregister)
+//        recognizeBtn = findViewById(R.id.buttonrecognize)
         addPwadBtn = findViewById(R.id.buttonaddpwad)
         listPwadBtn = findViewById(R.id.buttonlistpwads)
 
 
-        registerBtn.setOnClickListener {
-            startActivity(
-                Intent(
-                    this@MainActivity,
-                    RegisterActivity::class.java
-                )
-            )
-        }
-
-        recognizeBtn.setOnClickListener {
-            startActivity(
-                Intent(this@MainActivity, RecognitionActivity::class.java)
-            )
-        }
+//        registerBtn.setOnClickListener {
+//            startActivity(
+//                Intent(
+//                    this@MainActivity,
+//                    RegisterActivity::class.java
+//                )
+//            )
+//        }
+//
+//        recognizeBtn.setOnClickListener {
+//            startActivity(
+//                Intent(this@MainActivity, RecognitionActivity::class.java)
+//            )
+//        }
 
         addPwadBtn.setOnClickListener {
             startActivity(Intent(this@MainActivity, AddPwadActivity::class.java))

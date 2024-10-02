@@ -94,14 +94,14 @@ class RecognitionActivity : AppCompatActivity() {
         imageView = findViewById(R.id.imageView2)
 
         //TODO code for choosing images from gallery
-        galleryCard!!.setOnClickListener(View.OnClickListener {
+        galleryCard!!.setOnClickListener {
             val galleryIntent =
                 Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             galleryActivityResultLauncher.launch(galleryIntent)
-        })
+        }
 
         //TODO code for capturing images using camera
-        cameraCard!!.setOnClickListener(View.OnClickListener {
+        cameraCard!!.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED || checkSelfPermission(
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -119,7 +119,7 @@ class RecognitionActivity : AppCompatActivity() {
             } else {
                 openCamera()
             }
-        })
+        }
 
         //TODO initialize face detector
         val highAccuracyOpts = FaceDetectorOptions.Builder()
@@ -226,7 +226,7 @@ class RecognitionActivity : AppCompatActivity() {
             }
     }
 
-    fun performFaceRecognition(bounds: Rect, inputImage: Bitmap, canvas: Canvas) {
+    private fun performFaceRecognition(bounds: Rect, inputImage: Bitmap, canvas: Canvas) {
         if (bounds.top < 0) {
             bounds.top = 0
         }

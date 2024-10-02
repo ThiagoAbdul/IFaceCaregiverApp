@@ -122,23 +122,19 @@ class RegisterActivity : AppCompatActivity() {
 
         //TODO code for capturing images using camera
         cameraCard!!.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED || checkSelfPermission(
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
-                    == PackageManager.PERMISSION_DENIED
-                ) {
-                    val permission = arrayOf(
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    )
-                    requestPermissions(permission, PERMISSION_CODE)
-                } else {
-                    openCamera()
-                }
-            } else {
-                openCamera()
+            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED || checkSelfPermission(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                == PackageManager.PERMISSION_DENIED
+            ) {
+                val permission = arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                requestPermissions(permission, PERMISSION_CODE)
             }
+
+            openCamera()
         }
 
         //TODO initialize face detector
@@ -262,14 +258,10 @@ class RegisterActivity : AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.register_face_dialogue)
         val ivFace = dialog.findViewById<ImageView>(R.id.dlg_image)
-        val nameEd = dialog.findViewById<EditText>(R.id.dlg_input)
+
         val register = dialog.findViewById<Button>(R.id.button2)
         ivFace.setImageBitmap(croppedFace)
         register.setOnClickListener {
-            val name = nameEd.text.toString()
-            if (name.isEmpty()) {
-                nameEd.error = "Enter Name"
-            }
 
 
             val embedding = parseEmbeddingToString(rec.embeeding as Array<FloatArray>)
@@ -285,7 +277,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
 
-            faceClassifier!!.register(name, rec)
+//            faceClassifier!!.register(name, rec)
 
 
         }

@@ -80,7 +80,7 @@ class DBHelper(context: Context?) :
             val res = db.rawQuery("select * from faces", null)
             res.moveToFirst()
             val registered = HashMap<String?, Recognition>()
-            while (res.isAfterLast == false) {
+            while (!res.isAfterLast) {
                 val embeddingString = res.getString(res.getColumnIndex(FACE_COLUMN_EMBEDDING))
                 val stringList = embeddingString.split(",".toRegex()).dropLastWhile { it.isEmpty() }
                     .toTypedArray()
@@ -104,7 +104,6 @@ class DBHelper(context: Context?) :
                 registered.putIfAbsent(recognition.title, recognition)
                 res.moveToNext()
             }
-            Log.d("tryRL", "rl=" + registered.size)
             return registered
         }
 

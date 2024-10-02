@@ -1,9 +1,14 @@
 package com.example.facerecognitionimages.ui.activities
 
+import android.R.attr.label
+import android.R.attr.text
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+
 
 class PwadDetailsActivity : AppCompatActivity() {
 
@@ -38,9 +44,23 @@ class PwadDetailsActivity : AppCompatActivity() {
         btnViewKnownPersons = findViewById(R.id.btn_pwad_known_persons)
 
         val pwadId: String = intent.extras?.getString("pwad")!!
+        val carefulToken = intent.extras?.getString("carefulToken")!!
+
+        findViewById<Button>(R.id.btn_copy_careful_token).setOnClickListener {
+            val clipboard: ClipboardManager =
+                getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Careful token", carefulToken)
+            clipboard.setPrimaryClip(clip)
+        }
 
         btnViewKnownPersons.setOnClickListener {
             val intent = Intent(this, ListKnownPersonsActivity::class.java)
+            intent.putExtra("pwad", pwadId)
+            startActivity(intent)
+        }
+
+        findViewById<Button>(R.id.btn_add_known_person).setOnClickListener {
+            val intent = Intent(this@PwadDetailsActivity, AddKnownPersonActivity::class.java)
             intent.putExtra("pwad", pwadId)
             startActivity(intent)
         }

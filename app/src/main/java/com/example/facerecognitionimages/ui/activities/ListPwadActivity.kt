@@ -48,6 +48,8 @@ class ListPwadActivity : AppCompatActivity() {
         pwadAdapter = PwadAdapter(mutableListOf()) { pwad ->
             val intent = Intent(this@ListPwadActivity, PwadDetailsActivity::class.java)
             intent.putExtra("pwad", pwad.id)
+            intent.putExtra("carefulToken", pwad.carefulToken)
+
             startActivity(intent)
         }
 

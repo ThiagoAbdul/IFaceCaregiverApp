@@ -47,18 +47,17 @@ class TFLiteFaceRecognition private constructor(ctx: Context) : FaceClassifier {
         //Log.d("tryRes","Above= "+ ret!!.first+"   "+ret!!.second)
         for ((name, value) in registered) {
             val knownEmb = (value.embeeding as Array<FloatArray>?)!![0]
-            Log.d("tryResiN",name+"   "+knownEmb.contentToString());
             var distance = 0f
             for (i in emb.indices) {
                 val diff = emb[i] - knownEmb[i]
                 distance += diff * diff
+
             }
             distance = Math.sqrt(distance.toDouble()).toFloat()
             if (ret == null || distance < ret.second) {
                 ret = Pair(name, distance)
             }
         }
-        Log.d("tryRes","Below= "+ ret!!.first+"   "+ret!!.second)
         return ret
     }
 

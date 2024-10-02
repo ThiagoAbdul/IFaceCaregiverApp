@@ -8,6 +8,4 @@ class PwadResponse : java.io.Serializable{
     lateinit var id: String
     lateinit var person: Person
     lateinit var carefulToken: String
-
-
 }

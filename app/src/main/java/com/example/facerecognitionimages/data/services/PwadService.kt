@@ -1,6 +1,7 @@
 package com.example.facerecognitionimages.data.services
 
 import com.example.facerecognitionimages.apiUrl
+import com.example.facerecognitionimages.data.models.AddKnownPersonRequest
 import com.example.facerecognitionimages.data.models.KnownPersonResponse
 import com.example.facerecognitionimages.data.models.PwadResponse
 import com.example.facerecognitionimages.data.models.RegisterPwadRequest
@@ -13,6 +14,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
@@ -41,6 +43,14 @@ class PwadService(private val http: HttpClient) {
 
     suspend fun listKnwonPersonByPwadId(pwadId: String): List<KnownPersonResponse>{
         return http.get("${BASE_URL}/Pwad/${pwadId}/KnownPersons").body()
+    }
+
+    suspend fun addKnownPerson(pwadId: String, request: AddKnownPersonRequest) : Any{
+        val url = BASE_URL + "/Pwad/${pwadId}/AddKnownPerson"
+        return http.post(url){
+            contentType(ContentType.Application.Json)
+            setBody(request)
+        }.body()
     }
 
 }
