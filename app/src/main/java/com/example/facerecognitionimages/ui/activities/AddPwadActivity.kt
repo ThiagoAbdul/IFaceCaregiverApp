@@ -1,5 +1,6 @@
 package com.example.facerecognitionimages.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -9,12 +10,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.facerecognitionimages.MainActivity
 import com.example.facerecognitionimages.R
 import com.example.facerecognitionimages.data.models.PwadResponse
 import com.example.facerecognitionimages.data.models.RegisterPwadRequest
 import com.example.facerecognitionimages.data.services.PwadService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
@@ -51,6 +54,11 @@ class AddPwadActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 val addPwad = pwadService.addPwad(request)
                 showResult(addPwad)
+                delay(750)
+
+                startActivity(
+                    Intent(this@AddPwadActivity, MainActivity::class.java)
+                )
             }
 
 

@@ -2,6 +2,7 @@ package com.example.facerecognitionimages.di
 
 import com.example.facerecognitionimages.data.services.CaregiverService
 import com.example.facerecognitionimages.data.services.KnownPersonService
+import com.example.facerecognitionimages.data.services.LocationService
 import com.example.facerecognitionimages.data.services.PwadService
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
@@ -20,6 +21,7 @@ val appModule = module{
     singleOf(::CaregiverService)
     singleOf(::PwadService)
     singleOf(::KnownPersonService)
+    singleOf(::LocationService)
 
 }
 

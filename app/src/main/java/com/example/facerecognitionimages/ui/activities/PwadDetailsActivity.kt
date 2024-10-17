@@ -6,6 +6,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -14,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.facerecognitionimages.R
+import com.example.facerecognitionimages.data.models.PwadLocationResponse
 import com.example.facerecognitionimages.data.models.PwadResponse
+import com.example.facerecognitionimages.data.services.LocationService
 import com.example.facerecognitionimages.data.services.PwadService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,10 +27,11 @@ import org.koin.android.ext.android.inject
 
 class PwadDetailsActivity : AppCompatActivity() {
 
-    private lateinit var pwad: PwadResponse
+    private var pwad: PwadResponse? = null
     private lateinit var tvPwadName: TextView
     private lateinit var btnViewKnownPersons: Button
     private val pwadService: PwadService by inject()
+    private val locationService: LocationService by inject()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +70,10 @@ class PwadDetailsActivity : AppCompatActivity() {
         }
 
         fetchPwad(pwadId)
+
+        findViewById<Button>(R.id.btn_refresh_location).setOnClickListener {
+            loadLocation()
+        }
     }
 
     private fun fetchPwad(id: String){
@@ -73,8 +81,39 @@ class PwadDetailsActivity : AppCompatActivity() {
             val _pwad: PwadResponse? = pwadService.getPwadById(id)
             if(_pwad != null){
                 pwad = _pwad
-                tvPwadName.text = pwad.person.firstName
+                tvPwadName.text = pwad!!.person.firstName
+                loadLocation()
             }
         }
+    }
+
+    private fun loadLocation(){
+        if(pwad == null)
+            return
+
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                val lastLocation = locationService.getLastLocation(pwad!!.id)
+                if(lastLocation != null)
+                    setViews(lastLocation)
+            }
+        }
+        catch (ex: Exception){
+            Log.e("ERRO", ex.message.toString())
+        }
+
+    }
+
+    private fun setViews(location: PwadLocationResponse){
+        findViewById<TextView>(R.id.tv_country).text = location.country
+        findViewById<TextView>(R.id.tv_state).text = location.state
+        findViewById<TextView>(R.id.tv_city).text = location.city
+        findViewById<TextView>(R.id.tv_suburb).text = location.suburb
+        findViewById<TextView>(R.id.tv_road).text = location.road
+        findViewById<TextView>(R.id.tv_number).text = location.houseNumber
+        findViewById<TextView>(R.id.tv_postcode).text = location.postcode
+
+
+
     }
 }

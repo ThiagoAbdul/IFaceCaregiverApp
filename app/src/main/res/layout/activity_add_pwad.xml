@@ -17,7 +17,7 @@
             android:id="@+id/et_pwad_first_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/form_control_height"
-            android:hint="First name"
+            android:hint="Nome"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/form_control_height"
             android:layout_marginTop="8dp"
-            android:hint="Last name"
+            android:hint="Sobrenome"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

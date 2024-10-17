@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:background="@android:color/holo_purple"
         android:gravity="center"
-        android:text="Registration"
+        android:text="Cadastrar rosto"
         android:textColor="@color/white"
         android:textSize="20sp"
         tools:text="Registration" />
@@ -34,7 +34,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:text="Discard"
+        android:text="Descartar"
         android:textColor="@color/white" />
     <Button
         android:id="@+id/button2"
@@ -42,7 +42,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:text="Register"
+        android:text="Cadastrar"
         android:textColor="@color/white" />
 
 

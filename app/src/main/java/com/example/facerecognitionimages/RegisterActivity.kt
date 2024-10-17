@@ -158,7 +158,7 @@ class RegisterActivity : AppCompatActivity() {
             e.printStackTrace()
             val toast = Toast.makeText(
                 applicationContext,
-                "Classifier could not be initialized",
+                "Erro no classificador",
                 Toast.LENGTH_SHORT
             )
             toast.show()
@@ -260,7 +260,12 @@ class RegisterActivity : AppCompatActivity() {
         val ivFace = dialog.findViewById<ImageView>(R.id.dlg_image)
 
         val register = dialog.findViewById<Button>(R.id.button2)
+
         ivFace.setImageBitmap(croppedFace)
+        dialog.findViewById<Button>(R.id.btn_discard).setOnClickListener {
+
+            dialog.dismiss()
+        }
         register.setOnClickListener {
 
 
@@ -270,7 +275,7 @@ class RegisterActivity : AppCompatActivity() {
                 saveImage(embedding, croppedFace) {
                     Toast.makeText(
                         this@RegisterActivity,
-                        "Face Registered Successfully",
+                        "Rosto registrado com sucesso!",
                         Toast.LENGTH_SHORT
                     ).show()
                     dialog.dismiss()
@@ -278,9 +283,9 @@ class RegisterActivity : AppCompatActivity() {
             }
 
 //            faceClassifier!!.register(name, rec)
-
-
         }
+
+
 
         dialog.show()
     }
